@@ -1,23 +1,71 @@
 const listeMots = ["Cachalot", "Pétunia", "Serviette"]
+
+const listePhrases = ["Pas de panique !", "La vie, l'univers et le reste", "Merci pour le poisson"];
+
 let score = 0
 
-let premierNom =  prompt("Entrez le premier nom : " + listeMots[0] + " !")
+let choix =  prompt("Entrer ce que vous voulez entre 'mots' ou 'phrases' : ")
 
-if (premierNom === listeMots[0]) {
-    score++
+while( choix !== "mots" && choix !== "phrases") {
+
+    choix =  prompt("Entrer ce que vous voulez entre mots ou phrases")
 }
 
-let deuxiemeNom =  prompt("Entrez le premier nom : " + listeMots[1] + " !")
+if( choix === "mots"){
+    
+    for(let i = 0; i < listeMots.length; i++){
+        let motUtilisateur = prompt("Entrez le nom : " + listeMots[i])
+    
+        if (motUtilisateur === listeMots[i]) {
+            score++
+        }
+    
+    }
 
-if (deuxiemeNom === listeMots[1]) {
-    score++
+    console.log("Le score final est de " + score + " sur " + listeMots.length)
+
+} else {
+
+    for(let i = 0; i < listePhrases.length; i++){
+        let phraseUtilisateur = prompt("Entrez la phrase : " + listePhrases[i])
+    
+        if (phraseUtilisateur === listePhrases[i]) {
+            score++
+        }
+    
+    }
+
+    console.log("Le score final est de " + score + " sur " + listePhrases.length)
 }
 
 
-let troisiemeNom =  prompt("Entrez le premier nom : " + listeMots[2] + " !")
 
-if (troisiemeNom === listeMots[2]) {
-    score++
-}
+// les boucles 
 
-console.log("Le score final est de " + score + " sur 3")
+// for( let i = 0; i <3; i++){
+//     console.log(i)
+// }
+
+// const listeMots = ['Cachalot', 'Pétunia', 'Serviette']
+// console.log(listeMots[0])
+// console.log(listeMots[1])
+// console.log(listeMots[2])
+
+// for(let i = 0;  i < listeMots.length; i ++){
+//     console.log(listeMots[i])
+// }
+
+// let i = 0
+
+// while ( i < 3){
+//     console.log(i)
+//     i++
+// }
+
+// let phrase = prompt("Ecrivez Ok !")
+
+// while( phrase !== "ok"){
+//      phrase = prompt("Ecrivez Ok !")
+// }
+
+// console.log("Vous avez entré ok ")
