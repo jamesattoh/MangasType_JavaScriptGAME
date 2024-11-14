@@ -1,42 +1,68 @@
-const listeMots = ["Cachalot", "Pétunia", "Serviette"]
+/**  ATTENTION !!!
+ * les guillemets droits ( " ) et les apostrophes droits ( ' ) sont différents des versions typographiques 
+ * (comme ’ et “”). Même si ces caractères semblent identiques visuellement, ils sont traités différemment par
+ *  JavaScript lors des comparaisons de chaînes de caractères.
+**/
 
-const listePhrases = ["Pas de panique !", "La vie, l'univers et le reste", "Merci pour le poisson"];
 
-let score = 0
 
-let choix =  prompt("Entrer ce que vous voulez entre 'mots' ou 'phrases' : ")
+function choisirPhrasesOuMots(){
 
-while( choix !== "mots" && choix !== "phrases") {
+    let choix =  prompt("Entrer ce que vous voulez entre 'mots' ou 'phrases' : ")
 
-    choix =  prompt("Entrer ce que vous voulez entre mots ou phrases")
+    while( choix !== "mots" && choix !== "phrases") {
+
+        choix =  prompt("Entrer ce que vous voulez entre mots ou phrases")
+    }
+
+    return choix
 }
 
-if( choix === "mots"){
+
+ 
+
+
+function afficherResultat(resultat, nombreMotsProposes){
+
+    console.log("Le score final est de " + resultat + " sur " + nombreMotsProposes)
+
+}
+
+
+function lancerBoucleDeJeu(tableau){
+    let score = 0
+
+    for(let i = 0; i < tableau.length; i++){
+        let motUtilisateur = prompt("Entrez ce qui suit : " + tableau[i])
     
-    for(let i = 0; i < listeMots.length; i++){
-        let motUtilisateur = prompt("Entrez le nom : " + listeMots[i])
-    
-        if (motUtilisateur === listeMots[i]) {
+        if (motUtilisateur === tableau[i]) {
             score++
         }
     
     }
 
-    console.log("Le score final est de " + score + " sur " + listeMots.length)
+    return score
+}
 
-} else {
+function lancerJeu(){
 
-    for(let i = 0; i < listePhrases.length; i++){
-        let phraseUtilisateur = prompt("Entrez la phrase : " + listePhrases[i])
+    let choix = choisirPhrasesOuMots()
+    if( choix === "mots"){
     
-        if (phraseUtilisateur === listePhrases[i]) {
-            score++
-        }
+    let score = lancerBoucleDeJeu(listeMots)
+
+        afficherResultat(score, listeMots.length)
     
+    } else {
+    
+        let score =  lancerBoucleDeJeu(listePhrases)
+    
+        afficherResultat(score, listePhrases.length)
     }
 
-    console.log("Le score final est de " + score + " sur " + listePhrases.length)
 }
+
+
 
 
 
