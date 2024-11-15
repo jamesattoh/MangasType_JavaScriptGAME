@@ -10,9 +10,12 @@
  * @param {number} nombreMotsProposes : le nombre de mots proposés au joueur
  */
 function afficherResultat(resultat, nombreMotsProposes){
-
-    console.log("Le score final est de " + resultat + " sur " + nombreMotsProposes)
-
+    //je récupère la zone d'insertion du score
+    let spanScore = document.querySelector(".zoneScore span")
+    //format du score grace à l'interpolation ``
+    let affichageScore = ` ${resultat} / ${nombreMotsProposes}`
+    //je place le score 
+    spanScore.innerHTML = affichageScore
 }
 
 function choisirPhrasesOuMots(){
