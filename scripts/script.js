@@ -25,9 +25,21 @@ function afficherProposition(motAAfficher){
     zoneProposition.innerText = motAAfficher
 }
 
-function lancerJeu(){
+/**
+ * Cette fonction construit et affiche l'email. 
+ * @param {string} nom : le nom du joueur
+ * @param {string} email : l'email de la personne avec qui il veut partager son score
+ * @param {string} score : le score. 
+ */
+function afficherEmail(nom, email, score) {
+    let mailto = `mailto:${email}?subject=Partage du score Azertype&body=Salut, je suis ${nom} et je viens de réaliser le score de ${score} sur le site d'Azertype !`
+    location.href = mailto
+}
 
+function lancerJeu(){
+    
     //je fais les initialisations
+    initAddEventListenerPopup()
     let score = 0
     let btnValiderMot = document.getElementById("btnValiderMot")
     let inputEcriture = document.getElementById("inputEcriture")
@@ -71,7 +83,6 @@ function lancerJeu(){
     for(let j = 0; j < listeBtnRadio.length; j++){
         //j'ecoute le changement, avec la variable event, je reconnais l'evenement qui vient de se produire
         listeBtnRadio[j].addEventListener("change", (event) => {
-            console.log(event.target.value)
             //j'attribue la liste qu'il faut seloon le choix du joueur
             if( event.target.value === "1"){
                 listeProposition = listeMots
@@ -82,5 +93,21 @@ function lancerJeu(){
             afficherProposition(listeProposition[i])
         })
     }
+
+    let form = document.querySelector("form")
+    //j'ecoute l'evenement submit
+    form.addEventListener("submit", (event) => {
+        //je previens le comportement par defaut pour eviter le comportement de la page
+        event.preventDefault()
+        //je recupere les valeurs des champs presents
+        let baliseNom = document.getElementById("nom")
+        let sujet = baliseNom.value
+
+        let baliseEmail = document.getElementById("email")
+        let message = baliseEmail.value
+
+        let scoreEmail = `${score} / ${i}`
+        afficherEmail(sujet, message, scoreEmail)
+    })
     afficherResultat(score, i)
 }
