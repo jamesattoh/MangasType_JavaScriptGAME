@@ -18,54 +18,52 @@ function afficherResultat(resultat, nombreMotsProposes){
     spanScore.innerHTML = affichageScore
 }
 
-function choisirPhrasesOuMots(){
-
-    let choix =  prompt("Entrer ce que vous voulez entre 'mots' ou 'phrases' : ")
-    while( choix !== "mots" && choix !== "phrases") {
-        choix =  prompt("Entrer ce que vous voulez entre mots ou phrases")
-    }
-
-    return choix
-}
-
-/**
- * 
- * @param {Array[String]} listePropositions : le tableau ou la liste qui contient les mots/phrases
- * @returns {number} : le score du joueur
- */
-function lancerBoucleDeJeu(listePropositions){
-
-    let score = 0
-
-    for(let i = 0; i < listePropositions.length; i++){
-        // on demande au joueur d'entrer ce qui correspond à l'indice i
-        let entreeUtilisateur = prompt("Entrez ce qui suit : " + listePropositions[i])
-        if (entreeUtilisateur === listePropositions[i]) {
-            //on incremente son score si son entree est correcte
-            score++
-        }
-    
-    }
-
-    return score
+function afficherProposition(motAAfficher){
+    let zoneProposition = document.querySelector(".zoneProposition")
+    // let affichageProposition = `${motAAfficher}`
+    // zoneProposition.innerHTML = affichageProposition
+    zoneProposition.innerText = motAAfficher
 }
 
 function lancerJeu(){
-
-    let choix = choisirPhrasesOuMots()
+    //je fais les initialisations
     let score = 0
-    let nombreMotsProposes = 0
+    let btnValiderMot = document.getElementById("btnValiderMot")
+    let inputEcriture = document.getElementById("inputEcriture")
+    let i = 0
 
-    if( choix === "mots"){
-    
-        score = lancerBoucleDeJeu(listeMots)
-        nombreMotsProposes = listeMots.length
-    
-    } else {
-    
-        score =  lancerBoucleDeJeu(listePhrases)
-        nombreMotsProposes = listePhrases.length
-    }
+    //j'affiche le mot numero i tu tableau
+    afficherProposition(listeMots[i])
 
-    afficherResultat(score, nombreMotsProposes)
+    //j'ecoute l'evenement sur le bouton valider
+    btnValiderMot.addEventListener("click", () => {
+
+        /**je mets a jour le score du joueur; 1ere des choses a faire(avant le i++) sinon le score
+        ne changera pas **/
+        for(let i = 0; i < listeMots.length; i++){
+            if( listeMots[i] === inputEcriture.value){
+                score++
+            }
+        }
+
+        i++
+        afficherResultat(score, i)
+
+        //j'ajoute le test pour vooir si le mot[i] vaut undefined
+        if(listeMots[i] === listeMots[undefined]){
+        
+            //j'affiche le mot numero i tu tableau, donc apres incrementation
+            afficherProposition("Le jeu est finito !")
+            //je rends le bouton impossible a cliquer quand les propositiions sont terminees
+            btnValiderMot.disabled = true
+
+        }else{
+            afficherProposition(listeMots[i])
+        }
+
+        //je vide le champ a chaque clique ou ajout
+        inputEcriture.value = ``
+    })
+
+    afficherResultat(score, i)
 }
