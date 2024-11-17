@@ -63,7 +63,8 @@
     <div class="popupBackground">
         <div class="popup">
             <div>Partagez votre score</div>
-            <form>
+            <!-- novalidate:  je precìse que le navigateur me laisse moi meme gerer l'entiere validaation du form : par ex avec le @ du form -->
+            <form novalidate>
                 <label for="nom">Votre nom</label>
                 <input type="text" id="nom" name="nom" placeholder="Votre nom">
                 <label for="email">Avec qui voulez-vous partager votre score ?</label>

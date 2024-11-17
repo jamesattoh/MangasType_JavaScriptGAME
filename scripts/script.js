@@ -36,6 +36,27 @@ function afficherEmail(nom, email, score) {
     location.href = mailto
 }
 
+
+function validerNom(nomBalise){
+    //je procede a la verification de deux caracteres au minimum
+    if(nomBalise.value.length >= 2){
+        return true
+    }
+    return false
+       
+}
+
+function validerEmail(emailBalise){
+    //j'utilise une expression reguliere : les 2 \ pour signifier que je veux exactement le point .
+    let baliseRegExp = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+")
+    //on passe a la verification
+    if(baliseRegExp.test(emailBalise.value)){
+        return true
+    }
+    return false
+    
+}
+
 function lancerJeu(){
     
     //je fais les initialisations
@@ -107,7 +128,20 @@ function lancerJeu(){
         let message = baliseEmail.value
 
         let scoreEmail = `${score} / ${i}`
-        afficherEmail(sujet, message, scoreEmail)
+       // afficherEmail(sujet, message, scoreEmail)
+
+        console.log(validerNom(baliseNom))
+        console.log(validerEmail(baliseEmail))
+
+        if((validerNom(baliseNom) && validerEmail(baliseEmail )) === true){
+
+            afficherEmail(sujet, message, scoreEmail)
+        }else{
+            console.error("c'est une error")
+        }
+
     })
+
+
     afficherResultat(score, i)
 }
