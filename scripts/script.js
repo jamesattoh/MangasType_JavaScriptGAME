@@ -39,23 +39,59 @@ function afficherEmail(nom, email, score) {
 
 function validerNom(nomBalise){
     //je procede a la verification de deux caracteres au minimum
-    if(nomBalise.value.length >= 2){
-        return true
+    if(nomBalise.value.length < 2){
+        //je lance une exception den cas d'erreur
+        throw new Error(`Le nom est trop court`)
     }
-    return false
-       
 }
 
 function validerEmail(emailBalise){
     //j'utilise une expression reguliere : les 2 \ pour signifier que je veux exactement le point .
     let baliseRegExp = new RegExp("[a-z0-9._-]+@[a-z0-9._-]+\\.[a-z0-9._-]+")
     //on passe a la verification
-    if(baliseRegExp.test(emailBalise.value)){
-        return true
+    if(!baliseRegExp.test(emailBalise.value)){
+    //je lance une exception den cas d'erreur
+    throw new Error(`L'email n'est pas valide`)
     }
-    return false
-    
 }
+
+/**
+ * cette fonction s'occupe des informations du formulaire de la popup de sorrte que les bons parametres soient bien 
+ * places 
+ * @param {string} scoreEmail : le score a envoyer par email
+ */
+function gererFormulaire(scoreEmail){
+    //je gère l'affichage des erreurs avec le try catch
+    try{
+        //je recupere les valeurs des champs presents
+        let baliseNom = document.getElementById("nom")
+        let sujet = baliseNom.value
+        validerNom(baliseNom) 
+
+        let baliseEmail = document.getElementById("email")
+        let message = baliseEmail.value
+        validerEmail(baliseEmail )
+
+        afficherEmail(sujet,message,scoreEmail)
+    }catch(erreur){
+        afficherMessageErreur(erreur.message)
+    }
+}
+
+function afficherMessageErreur(messageErreur){
+    let spanErreurMessage = document.getElementById("idMessageErreur")
+
+    if(!spanErreurMessage){
+        let popup = document.querySelector(".popup")
+        spanErreurMessage = document.createElement("span")
+        spanErreurMessage.id = "idMessageErreur"
+        popup.append(spanErreurMessage)
+
+    }
+
+    spanErreurMessage.innerText = messageErreur
+}
+
 
 function lancerJeu(){
     
@@ -115,31 +151,14 @@ function lancerJeu(){
         })
     }
 
+    //cette partie gere l'evenement creee sur le submit du bouton partage de la popup
     let form = document.querySelector("form")
     //j'ecoute l'evenement submit
     form.addEventListener("submit", (event) => {
         //je previens le comportement par defaut pour eviter le comportement de la page
         event.preventDefault()
-        //je recupere les valeurs des champs presents
-        let baliseNom = document.getElementById("nom")
-        let sujet = baliseNom.value
-
-        let baliseEmail = document.getElementById("email")
-        let message = baliseEmail.value
-
         let scoreEmail = `${score} / ${i}`
-       // afficherEmail(sujet, message, scoreEmail)
-
-        console.log(validerNom(baliseNom))
-        console.log(validerEmail(baliseEmail))
-
-        if((validerNom(baliseNom) && validerEmail(baliseEmail )) === true){
-
-            afficherEmail(sujet, message, scoreEmail)
-        }else{
-            console.error("c'est une error")
-        }
-
+        gererFormulaire(scoreEmail)
     })
 
 
