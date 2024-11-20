@@ -32,7 +32,7 @@ function afficherProposition(motAAfficher){
  * @param {string} score : le score. 
  */
 function afficherEmail(nom, email, score) {
-    let mailto = `mailto:${email}?subject=Partage du score Azertype&body=Salut, je suis ${nom} et je viens de réaliser le score de ${score} sur le site d'Azertype !`
+    let mailto = `mailto:${email}?subject=Partage du score MangasType&body=Salut, je suis ${nom} et je viens de réaliser le score de ${score} sur le site d'MangasType !`
     location.href = mailto
 }
 
@@ -123,7 +123,7 @@ function lancerJeu(){
         //j'ajoute le test pour vooir si le mot[i] vaut undefined
         if(listeProposition[i] === listeProposition[undefined]){
             //j'affiche le mot numero i tu tableau, donc apres incrementation
-            afficherProposition("Le jeu est finito !")
+            afficherProposition("Le game est finito !")
             //je rends le bouton impossible a cliquer quand les propositiions sont terminees
             btnValiderMot.disabled = true
         }else{
@@ -148,6 +148,11 @@ function lancerJeu(){
             }
             //j'affiche directement la proposition suivant le changement du choix
             afficherProposition(listeProposition[i])
+
+            //au changement du radio(ou choix), si les mots/phrases se terminent, j'affiche toujours la fin du game
+            if(listeProposition[i] === listeProposition[undefined]){
+                afficherProposition("Le game est finito !")
+            }
         })
     }
 

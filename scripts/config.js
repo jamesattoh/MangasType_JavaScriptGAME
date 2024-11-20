@@ -7,6 +7,6 @@
 ********************************/
 
 //liste des mots cles et des phrases
-const listeMots = ["Cachalot", "Pétunia", "Serviette"]
+const listeMots = ["Shonen", "Seinen", "Isekai"]
 
-const listePhrases = ["Pas de panique !", "La vie, l'univers et le reste", "Merci pour le poisson"]; 
+const listePhrases = ["Le roi des Pirates, ce sera moi !", "Un jour, je deviendrai Hokage !", "Ma détermination, c'est ça ma Magie !"]; 
