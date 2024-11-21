@@ -146,13 +146,22 @@ function lancerJeu(){
             }else{
                 listeProposition = listePhrases
             }
-            //j'affiche directement la proposition suivant le changement du choix
-            afficherProposition(listeProposition[i])
+            
+            /**
+             * j'affiche directement la proposition suivant le changement du choix
+             * 
+             * j'ai utilise l'operateur nullish ?? grace au cours level++ de ce tuto et je l'ai teste ici
+             * ça fonctionne 😎
+             * il s'agit de toujours affcicher la fin du jeu lorsque le joueur change de radio alors que les 
+             * trois tours de jeu sont passés
+             * j'ai alors dû commenter l'autre solution qui est apres celle-ci
+             */
+            afficherProposition(listeProposition[i] ?? ("Le game est finito !"))
 
             //au changement du radio(ou choix), si les mots/phrases se terminent, j'affiche toujours la fin du game
-            if(listeProposition[i] === listeProposition[undefined]){
-                afficherProposition("Le game est finito !")
-            }
+            // if(listeProposition[i] === listeProposition[undefined]){
+            //     afficherProposition("Le game est finito !")
+            // }
         })
     }
 
